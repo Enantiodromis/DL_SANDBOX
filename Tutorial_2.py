@@ -124,8 +124,36 @@ print(f"\nThe 1-D tensor {x1} can be re-organised into a 2-D vector of size 2 {x
 
 x1 = torch.Tensor([[1,2,3],[4,5,6]])
 x2 = x1.permute(1, 0)
-print(f"\nThe 2-D tensor {x1} can be re-organized by swapping its dimensions into {x2}.")
+print(f"\nThe 2-D tensor {x1} can be re-organized by swapping its dimensions into {x2}")
 
 # OPERATION 4 --> MULTIPLICATION
-# The permute function reorders the dimensions of a tensor according to the specified order of indics using the '.permute' function.
-# Eg: A 2-D tensor x1 = [[1, 2, 3], [4, 5, 6]] can be re-organised by swapping its dimensions using permute to produce x2 = [[1, 4], [2, 5], [3, 6]]
+# The torch.matmul() function is the most commonly used matrix multiplication function in PyTorch due to its versatility.
+# It can handle different tensor dimensions (2D, vector-matrix, batched matrix multiplication) and supports broadcasting.
+# Eg: A 2-D tensor x1 = [[1, 2], [3, 4]] and x2 = [[5, 6], [7, 8]] can be multiplied using torch.matmul(x1, x2) to produce [[19, 22], [43, 50]].
+
+x1 = torch.Tensor([[1,2],[3,4]])
+x2 = torch.Tensor([[5,6],[7,8]])
+multiplied_tensors = torch.matmul(x1, x2)
+print(f"\nThe tensors {x1} and {x2} multipled via matmul = {multiplied_tensors}")
+
+########################
+# 1.5 INDEXING TENSORS #
+########################
+# Indexing allows for the selection of specific parts of a tensor.
+x = torch.arange(1,21,1).view(4,5)
+# Given tensor [[1,2,3,4,5],[6,7,8,9,10]]
+
+# A column can be chosen via [:,n] where n is the column number (zero indexed)
+print(f"\nFor tensor {x} the second column is {x[:,1]}")
+
+# A row can be chosen via [n] where n is the row number (zero indexing)
+print(f"\nFor tensor {x} the first row is {x[0]}")
+
+# Multiple rows can be chosen via [:n] where n is the index of the row you want to select until.
+print(f"\nFor tensor {x} the first 3 rows is {x[:3]}")
+
+# Multiple rows of a column can be chosen via [:n, -1] where n is the row you want to select until and -1 will get the last column.
+print(f"\nFor tensor {x} the first 3 rows of the last column is {x[:3, -1]}")
+
+# Specific row indexes can be chosen via [1:3, :]
+print(f"\nFor tensor {x} the second to third are {x[1:3, :]}")
